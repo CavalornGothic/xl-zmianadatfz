@@ -34,6 +34,19 @@ namespace FZZmianaDat
                 return true;
             };
         }
+
+        public static Rectangle PobierzKoordynatyDatyWplywu(ClaWindow window)
+        {
+            Rectangle bounds = new Rectangle(0,0,0,0);
+            foreach (ClaWindow a in window.AllChildren)
+            {
+                if (a.Id == 238)
+                {
+                    bounds = a.Bounds;
+                }
+            }
+            return bounds;
+        }
     }
     // podpięcie się pod procedurę FZ Spinacza - format dokumentu: (S)FZ-xxx
     [SubscribeProcedure(Procedures.TrN_FZSpinacz, "TrN_FZSpinacz")]
@@ -47,14 +60,7 @@ namespace FZZmianaDat
 
         public bool otworzEdycje(Procedures ProcId, int ControlId, Events Event)
         {
-            Rectangle bound = new Rectangle(0, 0, 0, 0);
-            foreach (ClaWindow a in base.GetWindow().AllChildren)
-            {
-                if (a.Id == 238)
-                {
-                    bound = a.Bounds;
-                }
-            }
+            Rectangle bound = ZmianaDat.PobierzKoordynatyDatyWplywu(base.GetWindow());
             ZmianaDat.DodajButtonEdycji(base.GetWindow(), new Rectangle(bound.X - 50, bound.Y, 50, 15));
             return true;
         }
@@ -74,14 +80,7 @@ namespace FZZmianaDat
 
         public bool otworzEdycje(Procedures ProcId, int ControlId, Events Event)
         {
-            Rectangle bound = new Rectangle(0, 0, 0, 0);
-            foreach (ClaWindow a in base.GetWindow().AllChildren)
-            {
-                if (a.Id == 238)
-                {
-                    bound = a.Bounds;
-                }
-            }
+            Rectangle bound = ZmianaDat.PobierzKoordynatyDatyWplywu(base.GetWindow());
             ZmianaDat.DodajButtonEdycji(base.GetWindow(), new Rectangle(bound.X - 50, bound.Y, 50, 15));
             return true;
         }
